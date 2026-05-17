@@ -13,13 +13,20 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import sentry_sdk
 
-import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
+
+ 
 
 sentry_sdk.init(
-    dsn="https://2a07ab76762f87ff56608a26c59e4f92@o4511405618692096.ingest.de.sentry.io/4511405722959952",
-    # Add data like request headers and IP for users,
-    # see https://docs.sentry.io/platforms/python/data-management/data-collected/ for more info
-    send_default_pii=True,
+
+    dsn="https://2a07ab76762f87ff56608a26c59e4f92@o4511405618692096.ingest.de.sentry.io/4511405722959952",  # Remplacez par le DSN copié depuis Sentry
+
+    integrations=[DjangoIntegration()],
+
+    traces_sample_rate=1.0,  # Ajustez le taux de collecte des traces
+
+    send_default_pii=True
+
 )
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
